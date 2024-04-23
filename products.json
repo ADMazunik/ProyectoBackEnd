@@ -1,0 +1,29 @@
+[
+    {
+        "code": 3333,
+        "title": "Cambio de nombre",
+        "description": "New Desc",
+        "price": 23000,
+        "thumbnail": "Sin imágen",
+        "stock": 2,
+        "id": 1
+    },
+    {
+        "code": 2222,
+        "title": "Prueba3",
+        "description": "Descripción de Prueba3",
+        "price": 20000,
+        "thumbnail": "Sin imágen",
+        "stock": 2,
+        "id": 2
+    },
+    {
+        "code": 1234,
+        "title": "Prueba",
+        "description": "Descripción de Prueba",
+        "price": 10000,
+        "thumbnail": "Sin imágen",
+        "stock": 9,
+        "id": 4
+    }
+]

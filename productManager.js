@@ -4,7 +4,8 @@ class ProductManager {
     constructor(path) {
         this.path = path
     }
-    #getLastId(products) {
+    async #getLastId() {
+        const products = await this.getProducts()
         let lastId = 0
         products.map((product) => {
             if (product.id > lastId) lastId = product.id
@@ -35,8 +36,8 @@ class ProductManager {
         }
     }
     async addProduct(title, description, price, thumbnail, code, stock) {
-        const products = await this.getProducts();
         try {
+            const products = await this.getProducts();
             if (products.some(product => product.code === code)) {
                 console.log("Product already exists")
             } else {
@@ -48,13 +49,13 @@ class ProductManager {
                     thumbnail,
                     code,
                     stock,
-                    id: this.#getLastId(products) + 1,
+                    id: await this.#getLastId() + 1,
                 }
                 if (Object.values(product).some(value => value === undefined)) {
                     console.log("Verify all values are not empty")
                 } else {
                     products.push(product)
-                    fs.promises.writeFile(this.path, JSON.stringify(products))
+                    await fs.promises.writeFile(this.path, JSON.stringify(products))
                     console.log("Added Product")
                 }
             }
@@ -62,19 +63,16 @@ class ProductManager {
             console.log(error)
         }
     }
-    async updateProduct(id, newData) {
-        const { title, description, price, thumbnail, code, stock } = newData
-        const products = await this.getProducts();
+    async updateProduct(id, obj) {
         try {
+            const products = await this.getProducts()
             const index = products.findIndex(product => product.id == id)
+            if (index === -1) { return "Error" }
+            const updatedProduct = { ...products[index] }
+            Object.assign(updatedProduct, obj)
+            products[index] = updatedProduct
 
-            if (title !== undefined) { products[index].title = title }
-            if (description !== undefined) { products[index].description = description }
-            if (price !== undefined) { products[index].price = price }
-            if (thumbnail !== undefined) { products[index].thumbnail = thumbnail }
-            if (code !== undefined) { products[index].code = code }
-            if (stock !== undefined) { products[index].stock = stock }
-            fs.promises.writeFile(this.path, JSON.stringify(products))
+            await fs.promises.writeFile(this.path, JSON.stringify(products))
             console.log("Updated Product")
 
         } catch (error) {
@@ -83,11 +81,12 @@ class ProductManager {
 
     }
     async deleteProduct(id) {
-        const products = await this.getProducts()
         try {
+            const products = await this.getProducts()
             const index = products.findIndex(product => product.id == id)
+            if (index === -1) { return "Product Not Found" }
             products.splice(index, 1)
-            fs.promises.writeFile(this.path, JSON.stringify(products))
+            await fs.promises.writeFile(this.path, JSON.stringify(products))
             console.log("Deleted Product")
         } catch (error) {
             console.log(error)
@@ -99,10 +98,24 @@ class ProductManager {
 
 const productManager = new ProductManager('./products.json');
 
-/* productManager.addProduct("Prueba", "Descripción de Prueba", 10000, "Sin imágen", 1234, 9);
-productManager.addProduct("Prueba2", "Descripción de Prueba2", 15000, "Sin imágen", 1111, 7);
-productManager.addProduct("Prueba3", "Descripción de Prueba3", 20000, "Sin imágen", 2222, 2);
-productManager.addProduct("Prueba4", "Descripción de Prueba4", 23000, "Sin imágen", 3333, 2);
+
+
+/* const addProducts = (t) => {
+    setTimeout(() => {
+        productManager.addProduct(`Prueba ${t}`, "Descripción de Prueba", 10000 * t, "Sin imágen", t + 234, 10 * t);
+    }, (t * 1000))
+}
+
+addProducts(1)
+addProducts(2)
+addProducts(3)
+addProducts(4)
 
 productManager.deleteProduct(3)
-productManager.updateProduct(1, { title: "Cambio de nombre", description: "New Desc" }) */
+productManager.updateProduct(1, { title: "Cambio de nombre", description: "New Desc" })
+
+const productsLog = async () => {
+    products = await productManager.getProducts()
+    console.log(products)
+}
+productsLog() */

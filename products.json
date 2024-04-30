@@ -1,29 +1,29 @@
 [
     {
-        "code": 3333,
+        "code": 235,
         "title": "Cambio de nombre",
         "description": "New Desc",
-        "price": 23000,
+        "price": 10000,
         "thumbnail": "Sin imágen",
-        "stock": 2,
+        "stock": 10,
         "id": 1
     },
     {
-        "code": 2222,
-        "title": "Prueba3",
-        "description": "Descripción de Prueba3",
+        "code": 236,
+        "title": "Prueba 2",
+        "description": "Descripción de Prueba",
         "price": 20000,
         "thumbnail": "Sin imágen",
-        "stock": 2,
+        "stock": 20,
         "id": 2
     },
     {
-        "code": 1234,
-        "title": "Prueba",
+        "code": 238,
+        "title": "Prueba 4",
         "description": "Descripción de Prueba",
-        "price": 10000,
+        "price": 40000,
         "thumbnail": "Sin imágen",
-        "stock": 9,
+        "stock": 40,
         "id": 4
     }
 ]

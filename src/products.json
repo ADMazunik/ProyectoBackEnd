@@ -1,0 +1,92 @@
+[
+    {
+        "code": 1111,
+        "title": "Producto de Prueba 1",
+        "description": "Descripción de producto 1",
+        "price": 1000,
+        "thumbnail": "Sin imágen",
+        "stock": 10,
+        "id": "6b4420a9-e277-4265-a265-e1e2952f6c8b"
+    },
+    {
+        "code": 2222,
+        "title": "Producto de Prueba 2",
+        "description": "Descripción de producto 2",
+        "price": 2000,
+        "thumbnail": "Sin imágen",
+        "stock": 20,
+        "id": "66d740f5-d445-4efb-921c-a3bda72550df"
+    },
+    {
+        "code": 3333,
+        "title": "Producto de Prueba 3",
+        "description": "Descripción de producto 3",
+        "price": 3000,
+        "thumbnail": "Sin imágen",
+        "stock": 30,
+        "id": "d62c7628-8312-43f1-8d60-f22dc3f5ab86"
+    },
+    {
+        "code": 4444,
+        "title": "Producto de Prueba 4",
+        "description": "Descripción de producto 4",
+        "price": 4000,
+        "thumbnail": "Sin imágen",
+        "stock": 40,
+        "id": "0e820217-f54f-4da2-97d1-96820d564787"
+    },
+    {
+        "code": 5555,
+        "title": "Producto de Prueba 5",
+        "description": "Descripción de producto 5",
+        "price": 5000,
+        "thumbnail": "Sin imágen",
+        "stock": 50,
+        "id": "5bae486f-4cea-426c-aeb6-fe17dcce6846"
+    },
+    {
+        "code": 6666,
+        "title": "Producto de Prueba 6",
+        "description": "Descripción de producto 6",
+        "price": 6000,
+        "thumbnail": "Sin imágen",
+        "stock": 60,
+        "id": "5abd0507-0e1b-49bd-8578-50c9e48424b8"
+    },
+    {
+        "code": 7777,
+        "title": "Producto de Prueba 7",
+        "description": "Descripción de producto 7",
+        "price": 7000,
+        "thumbnail": "Sin imágen",
+        "stock": 70,
+        "id": "1a2e68fd-2053-43b6-bd1c-f0b19fcc2648"
+    },
+    {
+        "code": 8888,
+        "title": "Producto de Prueba 8",
+        "description": "Descripción de producto 8",
+        "price": 8000,
+        "thumbnail": "Sin imágen",
+        "stock": 80,
+        "id": "e0e358fc-7160-429c-a88e-71c4e8cb36fe"
+    },
+    {
+        "code": 9999,
+        "title": "Producto de Prueba 9",
+        "description": "Descripción de producto 9",
+        "price": 9000,
+        "thumbnail": "Sin imágen",
+        "stock": 90,
+        "id": "9dd3dfe5-ad2a-4142-b918-357d05db5e0e"
+    },
+    {
+        "code": 11110,
+        "title": "Producto de Prueba 10",
+        "description": "Descripción de producto 10",
+        "price": 10000,
+        "thumbnail": "Sin imágen",
+        "stock": 100,
+        "id": "60eea367-d555-40dc-924d-8c462b215fbb"
+    }
+]

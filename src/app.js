@@ -1,35 +1,17 @@
 import express from "express";
-import ProductManager from "./productManager.js";
+import productsRouter from "./api/products/products.router.js"
+import cartsRouter from "./api/carts/carts.router.js"
+import { __dirname } from "./utils.js";
 
-const productManager = new ProductManager('./src/products.json');
 const app = express();
 const PORT = 8080;
 
+app.use(express.json());
 
-app.get("/products", async (req, res) => {
-    const { limit } = req.query
-    try {
-        const products = await productManager.getProducts()
-        if (!limit) { return res.status(200).json(products) }
-        res.status(200).json(products.slice(0, limit))
-    } catch (error) {
-        res.status(500).json({ msg: error.message })
-    }
-});
 
-app.get("/products/:pid", async (req, res) => {
-    try {
-        const { pid } = req.params
-        const product = await productManager.getProductById(pid)
-        if (product) {
-            return res.status(200).json(product)
-        }
-        res.status(404).json({ msg: "Product not found" })
+app.use("/products", productsRouter)
+app.use("/carts", cartsRouter)
 
-    } catch (error) {
-        res.status(500).json({ msg: error.message })
-    }
-});
 
 
 app.listen(PORT, () => {

@@ -25,28 +25,25 @@ export default class ProductManager {
             console.log(error)
         }
     }
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(obj) {
         try {
             const products = await this.getProducts();
-            if (products.some(product => product.code === code)) {
+            if (products.some(product => product.code === obj.code)) {
                 return "Product already exists"
             } else {
                 const product = {
-                    code,
-                    title,
-                    description,
-                    price,
-                    thumbnail,
-                    code,
-                    stock,
+                    status: true,
                     id: uuid(),
+                    thumbnail: "No Images",
+                    ...obj
                 }
                 if (Object.values(product).some(value => value === undefined)) {
+                    console.log(product)
                     return "Verify all field are not empty"
                 } else {
                     products.push(product)
                     await fs.promises.writeFile(this.path, JSON.stringify(products))
-                    return "Added product"
+                    return `Product created successfully with id: ${product.id}`
                 }
             }
         } catch (error) {
@@ -57,7 +54,7 @@ export default class ProductManager {
         try {
             const products = await this.getProducts()
             const index = products.findIndex(product => product.id == id)
-            if (index === -1) { return "Error" }
+            if (index === -1) { return "Product not found" }
             const productToUpdate = { ...products[index] }
             productToUpdate = { ...productToUpdate, ...obj }
             products[index] = productToUpdate
@@ -74,7 +71,7 @@ export default class ProductManager {
         try {
             const products = await this.getProducts()
             const index = products.findIndex(product => product.id == id)
-            if (index === -1) { return "Product Not Found" }
+            if (index === -1) { return null }
             products.splice(index, 1)
             await fs.promises.writeFile(this.path, JSON.stringify(products))
             return "Deleted product"

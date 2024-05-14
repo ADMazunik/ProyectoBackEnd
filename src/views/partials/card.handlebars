@@ -1,0 +1,14 @@
+<div>
+    <div class="m-3 p-3 d-flex flex-wrap gap-3" id="products">
+        {{#each products}}
+        <div class="card" style="width: 10rem;">
+            <img src={{thumbnail}} class="card-img-top" alt={{title}}>
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">{{description}}</p>
+                <a href="#" class="btn btn-primary">${{price}}</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

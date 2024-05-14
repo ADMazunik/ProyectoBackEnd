@@ -1,0 +1,43 @@
+{{>navbar}}
+
+<div class=" my-3 d-flex container-fluid gap-4 justify-content-evenly">
+    <div class="border border-success">
+        <h2 class="text-center m-3">Add a new product</h2>
+        <form id="newProductForm" class="p-4 container d-flex flex-column">
+            <div class="row gap-3">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Title" aria-label="title" id="title">
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="Code" aria-label="code" id="code">
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="Price" aria-label="price" id="price">
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="Stock" aria-label="stock" id="stock">
+                </div>
+                <div class="row mb-5">
+                    <textarea class="form-control" id="description" rows="4" placeholder="Description"
+                        aria-label="Description"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-success">Add new product</button>
+        </form>
+    </div>
+    <div class="border border-danger text-center">
+        <h2 class="text-center m-3">Delete Product</h2>
+        <form id="deleteProductForm" class="p-4 d-flex flex-column">
+            <div class="">
+                <input type="text" class="form-control mb-5" placeholder="Insert Product ID" aria-label="idDelete"
+                    id="idDelete">
+                <button type="submit" class=" btn btn-lg btn-danger">Delete Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{>card products=products id="products"}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

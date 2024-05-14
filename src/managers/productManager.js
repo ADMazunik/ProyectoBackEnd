@@ -37,8 +37,7 @@ export default class ProductManager {
                     thumbnail: "No Images",
                     ...obj
                 }
-                if (Object.values(product).some(value => value === undefined)) {
-                    console.log(product)
+                if (Object.values(product).some(value => value === undefined) || Object.values(product).some(value => value === "")) {
                     return "Verify all field are not empty"
                 } else {
                     products.push(product)

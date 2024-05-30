@@ -1,0 +1,16 @@
+{{>navbar}}
+
+<h1 class="text-center my-4">Bienvenido al Chat en vivo</h1>
+<div id="chat-container" class="container-fluid d-flex flex-column m-4 text-center">
+    <div id="chat-window" class="my-3 border border-success">
+        <div id="output"></div>
+        <div id="actions"></div>
+    </div>
+    <div class="container">
+        <input type="text" id="message" placeholder="message" />
+        <button id="send" class="btn btn-primary">Send</button>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>

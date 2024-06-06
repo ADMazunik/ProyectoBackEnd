@@ -9,8 +9,10 @@ router.get("/:cid", controller.getById);
 
 router.post("/", controller.create);
 
-router.post("/:cid/product/:pid", controller.addProductToCart)
+router.put("/:cid/products/:pid", controller.addProductToCart)
 
 router.delete("/:cid", controller.remove);
+
+router.delete("/:cid/products/:pid", controller.removeProductInCart)
 
 export default router;

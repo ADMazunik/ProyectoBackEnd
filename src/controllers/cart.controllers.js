@@ -31,6 +31,26 @@ export const create = async (req, res, next) => {
 };
 
 export const addProductToCart = async (req, res, next) => {
+    try {
+        const { cid, pid } = req.params
+        const { quantity } = req.body
+        const response = await service.addProductToCart(cid, pid, quantity)
+        if (!response) res.json({ msg: "Product or Cart not found" })
+        res.status(200).json(response)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+export const removeProductInCart = async (req, res, next) => {
+    try {
+        const { cid, pid } = req.params
+        const response = await service.removeProductInCart(cid, pid)
+        if (!response) res.json({ msg: "Product or Cart not found" })
+        res.status(200).json({ msg: `Product ${pid} removed successfully from cart` })
+    } catch (error) {
+        console.log(error)
+    }
 
 }
 

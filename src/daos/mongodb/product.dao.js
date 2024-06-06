@@ -1,9 +1,13 @@
 import { ProductModel } from "./models/product.model.js";
 
+
 export default class ProductMongoDB {
-    async getAll() {
+    async getAll(page = 1, limit = 10, name, sort) {
         try {
-            const response = await ProductModel.find({}).lean()
+            const filter = name ? { "title": name } : {}
+            let sortOrder = {}
+            if (sort) sortOrder.price = sort === "asc" ? 1 : sort === "desc" ? -1 : null
+            const response = await ProductModel.paginate(filter, { page, limit, sort: sortOrder })
             return response
         } catch (error) {
             console.log(error)

@@ -37,9 +37,9 @@ export const update = async (id, obj) => {
 
 export const addProductToCart = async (cartId, prodId, quantity = 1) => {
     try {
-        const cartExist = await getById(cartId)
-        const prodExist = await prodDao.getById(prodId)
-        if (cartExist && prodExist) {
+        const cart = await getById(cartId)
+        const prod = await prodDao.getById(prodId)
+        if (cart && prod) {
             return await cartDao.addProductToCart(cartId, prodId, quantity)
         } else return null
     } catch (error) {
@@ -49,10 +49,14 @@ export const addProductToCart = async (cartId, prodId, quantity = 1) => {
 
 export const removeProductInCart = async (cartId, prodId) => {
     try {
-        const cartExist = await getById(cartId)
-        const prodExist = await prodDao.getById(prodId)
-        if (cartExist && prodExist) {
-            return await cartDao.removeProductInCart(cartId, prodId)
+        const cart = await getById(cartId)
+        const prod = await prodDao.getById(prodId)
+        if (cart && prod) {
+            const prodExist = cart.products.findIndex(prod => prod.product._id.toString() === prodId)
+            if (prodExist >= 0) {
+                return await cartDao.removeProductInCart(cartId, prodId)
+            }
+            else return null
         } else return null
     } catch (error) {
         console.log(error)

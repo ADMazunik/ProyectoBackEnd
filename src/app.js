@@ -20,7 +20,7 @@ app.set("view engine", "handlebars");
 
 
 app.use("/products", productsRouter);
-app.use("/carts", cartsRouter);
+app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 app.use("/realtimeproducts", viewsRouter);
 

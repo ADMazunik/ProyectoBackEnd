@@ -46,8 +46,7 @@ export const removeProductInCart = async (req, res, next) => {
     try {
         const { cid, pid } = req.params
         const response = await service.removeProductInCart(cid, pid)
-        if (!response) res.json({ msg: "Product or Cart not found" })
-        res.status(200).json({ msg: `Product ${pid} removed successfully from cart` })
+        if (!response) { res.json({ msg: "Product or Cart not found" }) } else { res.status(200).json({ msg: `Product ${pid} removed successfully from cart` }) }
     } catch (error) {
         console.log(error)
     }

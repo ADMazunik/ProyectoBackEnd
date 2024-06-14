@@ -18,5 +18,16 @@
                 </li>
             </ul>
         </div>
+        {{#if loggedIn}}
+        <div class="d-flex align-items-center ">
+            <p class="text-white fs-5" style="max-height: 20px;">Bienvenido
+                {{#if isAdmin}}
+                <strong style="color: gold;">ADMIN {{username}}</strong>
+                {{else}} <strong>{{username}}</strong>
+                {{/if}}
+            </p>
+            <button onclick="location.href='/logout'" class="btn btn-sm btn-danger mx-4">LogOut</button>
+        </div>
+        {{/if}}
     </div>
 </nav>

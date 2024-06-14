@@ -1,0 +1,21 @@
+{{>navbar}}
+
+<h1 class="text-center my-4">Login</h1>
+
+
+<div class="d-flex flex-column container gap-5">
+    <form action="/login" method="post">
+        <div class="d-flex flex-column container gap-1">
+            <label for="password">Email:</label>
+            <input type="text" id="email" name="email" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <input type="submit" class="btn btn-lg btn-success" value="Login">
+        </div>
+    </form>
+
+    <div class="d-flex flex-column container gap-1">
+        <h2 class="text-center">Don't have an account?</h2>
+        <button onclick="location.href='/register'" class="btn btn-lg btn-primary">Create New Account</button>
+    </div>
+</div>

@@ -7,7 +7,7 @@ export default class ProductMongoDB {
             const filter = name ? { "title": name } : {}
             let sortOrder = {}
             if (sort) sortOrder.price = sort === "asc" ? 1 : sort === "desc" ? -1 : null
-            const response = await ProductModel.paginate(filter, { page, limit, sort: sortOrder })
+            const response = await ProductModel.paginate(filter, { page, limit, sort: sortOrder, lean: true })
             return response
         } catch (error) {
             console.log(error)

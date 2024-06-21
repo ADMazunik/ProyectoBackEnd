@@ -29,8 +29,13 @@ export const loginResponse = async (req, res, next) => {
 }
 
 export const logout = async (req, res, next) => {
-    req.session.destroy();
-    res.redirect("/login")
+    try {
+        req.session.destroy();
+        res.redirect("/login")
+    } catch (error) {
+        console.log(error)
+
+    }
 }
 
 /* export const login = async (req, res, next) => {

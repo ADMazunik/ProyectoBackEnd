@@ -8,6 +8,7 @@ import handlebars from "express-handlebars";
 
 import productsRouter from "./api/products/products.router.js";
 import cartsRouter from "./api/carts/carts.router.js";
+import usersRouter from "./api/users/users.router.js"
 import viewsRouter from "./api/views/views.router.js";
 
 import { initMongoDB } from "./daos/mongodb/connection.js";
@@ -21,7 +22,7 @@ import MongoStore from "connect-mongo";
 
 import passport from "passport";
 import "./passport/local-strategy.js";
-// import './passport/github-strategy.js';
+import './passport/github-strategy.js';
 
 
 const app = express();
@@ -56,6 +57,7 @@ app.use(passport.session());
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/users", usersRouter)
 app.use("/", viewsRouter);
 
 initMongoDB();

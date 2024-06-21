@@ -4,15 +4,21 @@
 
 
 <div class="d-flex flex-column container gap-5">
-    <form action="/login" method="post">
-        <div class="d-flex flex-column container gap-1">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" />
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" />
-            <input type="submit" class="btn btn-lg btn-success" value="Login">
+    <div class="d-flex flex-row justify-content-evenly">
+        <form action="/users/login" method="post">
+            <div class="d-flex flex-column container gap-1">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" />
+                <input type="submit" class="btn btn-lg btn-success" value="Login">
+            </div>
+        </form>
+        <div class="d-flex flex-column gap-1">
+            <h1>Login with GitHub</h1>
+            <a class="btn btn-sm btn-dark fw-bold fs-4" href="/users/register-github">Login with GitHub</a>
         </div>
-    </form>
+    </div>
 
     <div class="d-flex flex-column container gap-1">
         <h2 class="text-center">Don't have an account?</h2>

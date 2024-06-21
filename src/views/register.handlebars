@@ -1,8 +1,10 @@
 {{>navbar}}
 
+<button onclick="location.href='/login'" class="btn btn-sm btn-danger m-2 fw-bold">Back to Login</button>
+
 <h1 class="text-center my-4">Sign Up</h1>
 
-<form action="/register" method="post">
+<form action="/users/register" method="post">
     <div class="d-flex flex-column container gap-2">
         <label for="password">First Name:</label>
         <input type="text" id="firstName" name="first_name" />

@@ -4,7 +4,6 @@ import ProductManager from "../../daos/filesystem/product.dao.js";
 const productManager = new ProductManager(__dirname + '/daos/products.json'); */
 import * as service from "../../services/product.services.js";
 import * as controllers from "../../controllers/user.controllers.js"
-import { registerResponse, loginResponse } from "../../controllers/user.controllers.js";
 import passport from "passport";
 
 const router = Router();
@@ -91,21 +90,19 @@ router.get("/login", async (req, res) => {
     }
 })
 
-router.post("/login", passport.authenticate("login"), loginResponse)
-
-router.post("/register", passport.authenticate('register', { failureRedirect: "/failregister" }), registerResponse)
-
-router.get("/failregister", async (req, res) => {
-    console.log("Failed Register")
-    res.json({ msg: "Failed" })
-}
-)
-
-
 router.get("/register", async (req, res) => {
     res.render("register")
 })
 
-router.get("/logout", controllers.logout)
+router.get("/profile-github", async (req, res) => {
+    const user = req.user.toObject()
+    req.session.info = {
+        loggedIn: true,
+        username: user.first_name,
+        role: user.role
+    };
+    res.render("profile", { user, loggedIn: true, username: user.first_name })
+})
+
 
 export default router

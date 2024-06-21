@@ -19,4 +19,20 @@ export default class UserMongoDB {
             console.log(error)
         }
     }
+
+    async getById(id) {
+        try {
+            return await UserModel.findById(id)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getByEmail(email) {
+        try {
+            return await UserModel.findOne({ email })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

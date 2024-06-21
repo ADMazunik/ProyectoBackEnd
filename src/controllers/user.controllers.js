@@ -1,6 +1,39 @@
 import * as service from "../services/user.services.js"
 
-export const login = async (req, res, next) => {
+export const registerResponse = (req, res, next) => {
+    try {
+        res.redirect("/login")
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const loginResponse = async (req, res, next) => {
+    try {
+        let id = null;
+        if (req.session.passport && req.session.passport.user) id = req.session.passport.user
+        const user = await service.getUserById(id)
+        if (!user) res.status(401).json({ msg: "Usuario o Contraseña inválidos" })
+        else {
+            const { first_name, last_name, email, age, role } = user
+            req.session.info = {
+                loggedIn: true,
+                username: email,
+                role: role
+            };
+            res.redirect("/products")
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const logout = async (req, res, next) => {
+    req.session.destroy();
+    res.redirect("/login")
+}
+
+/* export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body
         const response = await service.login(email, password)
@@ -36,9 +69,4 @@ export const register = async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-}
-
-export const logout = async (req, res, next) => {
-    req.session.destroy();
-    res.redirect("/login")
-}
+} */

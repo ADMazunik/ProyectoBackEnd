@@ -24,7 +24,16 @@ const UserSchema = new Schema({
     role: {
         type: String,
         default: "user"
-    }
+    },
+    cart: [
+        {
+            _id: false,
+            product: {
+                type: Schema.Types.ObjectId,
+                ref: "carts"
+            }
+        }
+    ]
 });
 
 export const UserModel = model('users', UserSchema);

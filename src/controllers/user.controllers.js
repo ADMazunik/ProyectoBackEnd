@@ -15,11 +15,11 @@ export const loginResponse = async (req, res, next) => {
         const user = await service.getUserById(id)
         if (!user) res.status(401).json({ msg: "Usuario o Contraseña inválidos" })
         else {
-            const { first_name, last_name, email, age, role } = user
             req.session.info = {
+                user,
                 loggedIn: true,
-                username: email,
-                role: role
+                username: user.email,
+                role: user.role
             };
             res.redirect("/products")
         }
@@ -36,6 +36,27 @@ export const logout = async (req, res, next) => {
         console.log(error)
 
     }
+}
+
+export const currentSession = async (req, res, next) => {
+    try {
+        let id = null;
+        if (req.session.passport && req.session.passport.user) id = req.session.passport.user
+        const user = await service.getUserById(id)
+        if (!user) res.status(403).json({ msg: "Access Unauthorized" })
+        else {
+            req.session.info = {
+                user,
+                loggedIn: true,
+                username: user.email,
+                role: user.role
+            };
+            res.json(req.session)
+        }
+    } catch (error) {
+        next(error)
+    }
+
 }
 
 /* export const login = async (req, res, next) => {

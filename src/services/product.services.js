@@ -1,5 +1,6 @@
 import ProductMongoDB from "../daos/mongodb/product.dao.js";
 const prodDao = new ProductMongoDB();
+import { productGenerator } from "../mocks.utils.js";
 
 export const getAll = async (page, limit, name, sort) => {
     try {
@@ -40,3 +41,16 @@ export const remove = async (id) => {
         console.log(error)
     }
 };
+
+export const createProductsMock = async (count = 100) => {
+    try {
+        const productsMock = [];
+        for (let i = 0; i < count; i++) {
+            const user = productGenerator()
+            productsMock.push(user)
+        };
+        return productsMock;
+    } catch (error) {
+        console.log(error)
+    }
+}

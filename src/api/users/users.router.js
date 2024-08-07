@@ -17,7 +17,8 @@ router.get("/profile", passport.authenticate("github", {
 }))
 
 router.get("/logout", controllers.logout)
-
 router.get("/current", controllers.currentSession)
+
+router.get("/mockingusers", controllers.getUsersMock)
 
 export default router;

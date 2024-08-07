@@ -1,6 +1,7 @@
 import UserMongoDB from "../daos/mongodb/user.dao.js";
 const userDAO = new UserMongoDB();
 import { createHash, isValidPassword } from "../utils.js";
+import { userGenerator } from "../mocks.utils.js";
 
 export const getUserById = async (id) => {
     try {
@@ -54,3 +55,17 @@ export const register = async (user) => {
     }
 }
 
+export const createUsersMock = async (count = 100) => {
+    try {
+        const usersMock = [];
+        for (let i = 0; i < count; i++) {
+            const user = userGenerator()
+            usersMock.push(user)
+        };
+        return usersMock;
+    } catch (error) {
+        console.log(error)
+
+    }
+
+}

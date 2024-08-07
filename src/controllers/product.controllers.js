@@ -69,3 +69,14 @@ export const remove = async (req, res, next) => {
         console.log(error)
     }
 };
+
+export const getProductsMock = async (req, res, next) => {
+    try {
+        let { count } = req.query
+        res.json(await service.createProductsMock(count))
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}

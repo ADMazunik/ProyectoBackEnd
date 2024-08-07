@@ -56,6 +56,7 @@ app.use(passport.session());
 
 
 app.use("/api/products", productsRouter);
+app.use("/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", usersRouter)
 app.use("/users", usersRouter)

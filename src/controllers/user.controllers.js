@@ -59,6 +59,17 @@ export const currentSession = async (req, res, next) => {
 
 }
 
+export const getUsersMock = async (req, res, next) => {
+    try {
+        let { count } = req.query
+        res.json(await service.createUsersMock(count))
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
 /* export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body

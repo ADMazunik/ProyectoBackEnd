@@ -5,7 +5,7 @@ export default class UserMongoDB {
         try {
             return await UserModel.findOne({ email, password })
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -16,7 +16,7 @@ export default class UserMongoDB {
             if (!userExist) return await UserModel.create(user)
             else return null
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -24,7 +24,7 @@ export default class UserMongoDB {
         try {
             return await UserModel.findById(id)
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -32,7 +32,7 @@ export default class UserMongoDB {
         try {
             return await UserModel.findOne({ email })
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 }

@@ -6,7 +6,7 @@ export default class MessageMongoDB {
             const response = await MessageModel.find({}).lean()
             return response
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
     async create(obj) {
@@ -14,7 +14,7 @@ export default class MessageMongoDB {
             const response = await MessageModel.create(obj);
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -23,7 +23,7 @@ export default class MessageMongoDB {
             const response = await MessageModel.findByIdAndDelete(id);
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 

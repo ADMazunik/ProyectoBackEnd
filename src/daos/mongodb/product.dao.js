@@ -10,7 +10,7 @@ export default class ProductMongoDB {
             const response = await ProductModel.paginate(filter, { page, limit, sort: sortOrder, lean: true })
             return response
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -19,7 +19,7 @@ export default class ProductMongoDB {
             const response = await ProductModel.findById(id);
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -28,7 +28,7 @@ export default class ProductMongoDB {
             const response = await ProductModel.create(obj);
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -39,7 +39,7 @@ export default class ProductMongoDB {
             });
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -48,7 +48,7 @@ export default class ProductMongoDB {
             const response = await ProductModel.findByIdAndDelete(id);
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 }

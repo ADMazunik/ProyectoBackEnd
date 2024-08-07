@@ -24,6 +24,8 @@ import passport from "passport";
 import "./passport/local-strategy.js";
 import './passport/github-strategy.js';
 
+import { errorHandler } from "./middlewares/errorHandler.js";
+
 
 const app = express();
 const PORT = 8080;
@@ -40,27 +42,25 @@ const storeConfig = {
     cookie: { MaxAge: 180000 }
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + "/public"));
-app.use(cookieParser());
-app.use(session(storeConfig));
+app.use(express.json())
+    .use(express.urlencoded({ extended: true }))
+    .use(express.static(__dirname + "/public"))
+    .use(cookieParser())
+    .use(session(storeConfig))
 
+    .engine("handlebars", handlebars.engine())
+    .set("views", __dirname + "/views")
+    .set("view engine", "handlebars")
 
-app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views");
-app.set("view engine", "handlebars");
+    .use(passport.initialize())
+    .use(passport.session())
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use("/api/products", productsRouter);
-app.use("/products", productsRouter);
-app.use("/api/carts", cartsRouter);
-app.use("/api/sessions", usersRouter)
-app.use("/users", usersRouter)
-app.use("/", viewsRouter);
+    .use("/api/products", productsRouter)
+    .use("/api/carts", cartsRouter)
+    .use("/api/sessions", usersRouter)
+    .use("/users", usersRouter)
+    .use("/", viewsRouter)
+    .use(errorHandler);
 
 initMongoDB();
 

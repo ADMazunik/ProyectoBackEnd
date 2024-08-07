@@ -1,4 +1,6 @@
 import * as service from "../services/product.services.js";
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse()
 
 export const getAll = async (req, res, next) => {
     try {
@@ -23,7 +25,7 @@ export const getAll = async (req, res, next) => {
             }
         });
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -34,7 +36,7 @@ export const getById = async (req, res, next) => {
         if (!prod) res.status(404).json({ msg: 'Product not found' });
         else res.json(prod);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -44,7 +46,7 @@ export const create = async (req, res, next) => {
         if (!newProd) res.status(404).json({ msg: 'Error creating product' });
         else res.json(newProd);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -55,7 +57,7 @@ export const update = async (req, res, next) => {
         if (!prodUpd) res.status(404).json({ msg: 'Error updating product' });
         else res.json(prodUpd);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -66,7 +68,7 @@ export const remove = async (req, res, next) => {
         if (!prodDel) res.status(404).json({ msg: 'Error removing product' });
         else res.json(prodDel);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -76,7 +78,7 @@ export const getProductsMock = async (req, res, next) => {
         res.json(await service.createProductsMock(count))
 
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 
 }

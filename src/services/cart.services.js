@@ -7,7 +7,7 @@ export const getAll = async () => {
     try {
         return await cartDao.getAll();
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 };
 
@@ -15,7 +15,7 @@ export const getById = async (id) => {
     try {
         return await cartDao.getById(id);
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 };
 
@@ -23,7 +23,7 @@ export const create = async (obj) => {
     try {
         return await cartDao.create(obj);
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 };
 
@@ -31,7 +31,7 @@ export const update = async (id, obj) => {
     try {
         return await cartDao.update(id, obj);
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 };
 
@@ -43,7 +43,7 @@ export const addProductToCart = async (cartId, prodId, quantity = 1) => {
             return await cartDao.addProductToCart(cartId, prodId, quantity)
         } else return null
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 
@@ -59,7 +59,7 @@ export const removeProductInCart = async (cartId, prodId) => {
             else return null
         } else return null
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 
@@ -67,6 +67,6 @@ export const remove = async (id) => {
     try {
         return await cartDao.delete(id);
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 };

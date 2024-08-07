@@ -1,20 +1,20 @@
 import UserMongoDB from "../daos/mongodb/user.dao.js";
 const userDAO = new UserMongoDB();
 import { createHash, isValidPassword } from "../utils.js";
-import { userGenerator } from "../mocks.utils.js";
+import { userGenerator } from "../utils/mocks.utils.js";
 
 export const getUserById = async (id) => {
     try {
         return await userDAO.getById(id)
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 export const getUserByEmail = async (email) => {
     try {
         return await userDAO.getByEmail(email)
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 export const login = async (user) => {
@@ -26,7 +26,7 @@ export const login = async (user) => {
         if (!validatePassword) return null
         return userExist
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 
@@ -51,7 +51,7 @@ export const register = async (user) => {
             }
         } else return null
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
     }
 }
 
@@ -64,7 +64,7 @@ export const createUsersMock = async (count = 100) => {
         };
         return usersMock;
     } catch (error) {
-        console.log(error)
+        throw new Error(error);
 
     }
 

@@ -1,11 +1,13 @@
 import * as service from "../services/cart.services.js"
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse()
 
 export const getAll = async (req, res, next) => {
     try {
         const response = await service.getAll();
         res.json(response);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -16,7 +18,7 @@ export const getById = async (req, res, next) => {
         if (!cart) res.status(404).json({ msg: 'Cart not found' });
         else res.json(cart);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -26,7 +28,7 @@ export const create = async (req, res, next) => {
         if (!newCart) res.status(404).json({ msg: 'Error creating cart' });
         else res.json(newCart);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -38,7 +40,7 @@ export const addProductToCart = async (req, res, next) => {
         if (!response) res.json({ msg: "Product or Cart not found" })
         res.status(200).json(response)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 
 }
@@ -48,7 +50,7 @@ export const removeProductInCart = async (req, res, next) => {
         const response = await service.removeProductInCart(cid, pid)
         if (!response) { res.json({ msg: "Product or Cart not found" }) } else { res.status(200).json({ msg: `Product ${pid} removed successfully from cart` }) }
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 
 }
@@ -60,7 +62,7 @@ export const update = async (req, res, next) => {
         if (!cartUpdate) res.status(404).json({ msg: 'Error updating cart' });
         else res.json(cartUpdate);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };
 
@@ -71,6 +73,6 @@ export const remove = async (req, res, next) => {
         if (!cartDelete) res.status(404).json({ msg: 'Error removing cart' });
         else res.json(cartDelete);
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 };

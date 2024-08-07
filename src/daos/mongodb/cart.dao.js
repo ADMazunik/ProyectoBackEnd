@@ -7,7 +7,7 @@ export default class CartMongoDB {
             const response = await CartModel.find({}).lean()
             return response
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -16,7 +16,7 @@ export default class CartMongoDB {
             const response = await CartModel.findById(id).populate("products.product");
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -27,7 +27,7 @@ export default class CartMongoDB {
             });
             return response;
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 
@@ -44,8 +44,7 @@ export default class CartMongoDB {
             cart.save()
             return cart
         } catch (error) {
-            console.log(error)
-
+            throw new Error(error);
         }
 
     }
@@ -57,8 +56,7 @@ export default class CartMongoDB {
                 { new: true }
             )
         } catch (error) {
-            console.log(error)
-
+            throw new Error(error);
         }
     }
     async cleanCart(cartId) {
@@ -69,7 +67,7 @@ export default class CartMongoDB {
                 { new: true }
             )
         } catch (error) {
-            console.log(error)
+            throw new Error(error);
         }
     }
 }

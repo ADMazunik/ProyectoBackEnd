@@ -1,4 +1,7 @@
 import * as service from "../services/user.services.js"
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse()
+
 
 export const registerResponse = (req, res, next) => {
     try {
@@ -13,7 +16,7 @@ export const loginResponse = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user
         const user = await service.getUserById(id)
-        if (!user) res.status(401).json({ msg: "Usuario o Contraseña inválidos" })
+        if (!user) httpResponse.NotFound(res, user)
         else {
             req.session.info = {
                 user,
@@ -33,7 +36,7 @@ export const logout = async (req, res, next) => {
         req.session.destroy();
         res.redirect("/login")
     } catch (error) {
-        console.log(error)
+        next(error)
 
     }
 }
@@ -43,7 +46,7 @@ export const currentSession = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user
         const user = await service.getUserById(id)
-        if (!user) res.status(403).json({ msg: "Access Unauthorized" })
+        if (!user) httpResponse.Unauthorized(res, user)
         else {
             req.session.info = {
                 user,
@@ -65,7 +68,7 @@ export const getUsersMock = async (req, res, next) => {
         res.json(await service.createUsersMock(count))
 
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 
 }
@@ -84,7 +87,7 @@ export const getUsersMock = async (req, res, next) => {
             res.status(201).redirect("/products")
         }
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -104,6 +107,6 @@ export const register = async (req, res, next) => {
             else return res.redirect("/login")
         }
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 } */

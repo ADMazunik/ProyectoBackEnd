@@ -1,5 +1,6 @@
 const HttpStatus = {
     OK: 201,
+    BAD_REQUEST: 400,
     NOT_FOUND: 404,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
@@ -15,26 +16,34 @@ export class HttpResponse {
         });
     }
 
-    NotFound(res, data) {
-        return res.status(HttpStatus.NOT_FOUND).json({
-            status: HttpStatus.NOT_FOUND,
-            message: "Not Found",
+    BadRequest(res, message = "Invalid Request", data) {
+        return res.status(HttpStatus.BAD_REQUEST).json({
+            status: HttpStatus.BAD_REQUEST,
+            message,
             data,
         });
     }
 
-    Unauthorized(res, data) {
+    NotFound(res, message = "Not Found", data) {
+        return res.status(HttpStatus.NOT_FOUND).json({
+            status: HttpStatus.NOT_FOUND,
+            message,
+            data,
+        });
+    }
+
+    Unauthorized(res, message = "Unauthorized Access", data) {
         return res.status(HttpStatus.UNAUTHORIZED).json({
             status: HttpStatus.UNAUTHORIZED,
-            message: "Unauthorized Access",
+            message,
             error: data,
         });
     }
 
-    Forbidden(res, data) {
+    Forbidden(res, message = "Forbidden", data) {
         return res.status(HttpStatus.FORBIDDEN).json({
             status: HttpStatus.FORBIDDEN,
-            message: "Forbidden",
+            message,
             error: data,
         });
     }

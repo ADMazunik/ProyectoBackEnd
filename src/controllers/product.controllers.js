@@ -1,6 +1,7 @@
 import * as service from "../services/product.services.js";
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse()
+import { ProductsError } from "../utils/errors.dictionary.js";
 
 export const getAll = async (req, res, next) => {
     try {
@@ -33,7 +34,7 @@ export const getById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const prod = await service.getById(id);
-        if (!prod) res.status(404).json({ msg: 'Product not found' });
+        if (!prod) httpResponse.NotFound(res, ProductsError.NOT_FOUND, prod)
         else res.json(prod);
     } catch (error) {
         next(error);
@@ -43,7 +44,7 @@ export const getById = async (req, res, next) => {
 export const create = async (req, res, next) => {
     try {
         const newProd = await service.create(req.body);
-        if (!newProd) res.status(404).json({ msg: 'Error creating product' });
+        if (!newProd) httpResponse.BadRequest(res, ProductsError.NOT_CREATED, data);
         else res.json(newProd);
     } catch (error) {
         next(error);
@@ -54,7 +55,7 @@ export const update = async (req, res, next) => {
     try {
         const { id } = req.params;
         const prodUpd = await service.update(id, req.body);
-        if (!prodUpd) res.status(404).json({ msg: 'Error updating product' });
+        if (!prodUpd) httpResponse.BadRequest(res, ProductsError.NOT_UPDATED, data);
         else res.json(prodUpd);
     } catch (error) {
         next(error);
@@ -65,7 +66,7 @@ export const remove = async (req, res, next) => {
     try {
         const { id } = req.params;
         const prodDel = await service.remove(id);
-        if (!prodDel) res.status(404).json({ msg: 'Error removing product' });
+        if (!prodDel) httpResponse.BadRequest(res, ProductsError.NOT_REMOVED, data)
         else res.json(prodDel);
     } catch (error) {
         next(error);

@@ -26,6 +26,8 @@ import './passport/github-strategy.js';
 
 import { errorHandler } from "./middlewares/errorHandler.js";
 
+import { logger } from "./utils/logger.js";
+
 
 const app = express();
 const PORT = 8080;
@@ -66,7 +68,7 @@ initMongoDB();
 
 
 const httpServer = app.listen(PORT, () => {
-    console.log(`Server UP on port ${PORT}`)
+    logger.info(`Server UP on port ${PORT}`)
 });
 
 const socketServer = new Server(httpServer)

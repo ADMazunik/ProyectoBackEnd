@@ -6,6 +6,8 @@ import * as service from "../../services/product.services.js";
 import * as controllers from "../../controllers/user.controllers.js"
 import passport from "passport";
 
+import { logger } from "../../utils/logger.js";
+
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -104,5 +106,13 @@ router.get("/profile-github", async (req, res) => {
     res.render("profile", { user, loggedIn: true, username: user.first_name })
 })
 
+router.get("/loggerTest", async (req, res) => {
+    logger.debug("Prueba de Log DEBUG")
+    logger.http("Prueba de Log HTTP")
+    logger.info("Prueba de Log INFO")
+    logger.warning("Prueba de Log WARNING")
+    logger.error("Prueba de Log ERROR")
+    logger.fatal("Prueba de Log FATAL")
+})
 
 export default router

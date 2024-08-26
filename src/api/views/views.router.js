@@ -115,4 +115,10 @@ router.get("/loggerTest", async (req, res) => {
     logger.fatal("Prueba de Log FATAL")
 })
 
+router.get("/new-pass", async (req, res) => {
+    res.render("newpass")
+})
+
+router.post("/new-pass", controllers.updatePassword)
+
 export default router

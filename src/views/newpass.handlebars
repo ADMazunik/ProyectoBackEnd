@@ -1,0 +1,13 @@
+{{>navbar}}
+
+<button onclick="location.href='/'" class="btn btn-sm btn-danger m-2 fw-bold">Home</button>
+
+<h1 class="text-center my-4">Change Password</h1>
+
+<form action="/new-pass" method="post">
+    <div class="d-flex flex-column container gap-2">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <input type="submit" class="btn btn-lg btn-success" value="Change Password">
+    </div>
+</form>

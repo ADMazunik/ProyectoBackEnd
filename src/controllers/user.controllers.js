@@ -2,6 +2,7 @@ import * as service from "../services/user.services.js"
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse()
 
+import { sendMail } from "../services/mailing.js";
 
 export const registerResponse = (req, res, next) => {
     try {
@@ -67,6 +68,40 @@ export const getUsersMock = async (req, res, next) => {
         let { count } = req.query
         res.json(await service.createUsersMock(count))
 
+    } catch (error) {
+        next(error)
+    }
+
+}
+
+export const generateResetPassword = async (req, res, next) => {
+    try {
+        let id = null;
+        if (req.session.passport && req.session.passport.user) id = req.session.passport.user;
+        const user = await service.getUserById(id)
+        if (!user) return httpResponse.NotFound(res, user)
+        else {
+            const mail = await sendMail(user);
+            if (mail == true) return httpResponse.Ok(res, user)
+            else return httpResponse.NotFound(res, user)
+        }
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const updatePassword = async (req, res, next) => {
+    try {
+        let id = null;
+        if (req.session.passport && req.session.passport.user) id = req.session.passport.user
+        const user = await service.getUserById(id)
+        if (!user) httpResponse.NotFound(res, user)
+        const { password } = req.body;
+
+        const newPass = await service.updatePassword(password, user);
+        if (!newPass) return httpResponse.NotFound(res, "Password cannot be the same", user);
+        else logout()
     } catch (error) {
         next(error)
     }

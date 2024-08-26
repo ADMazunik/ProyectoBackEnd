@@ -21,4 +21,6 @@ router.get("/current", controllers.currentSession)
 
 router.get("/mockingusers", controllers.getUsersMock)
 
+router.get("/new-pass", controllers.generateResetPassword)
+
 export default router;

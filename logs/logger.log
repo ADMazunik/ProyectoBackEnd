@@ -1,0 +1,7 @@
+2024-08-25 22:17:20 | error | TypeError: Cannot destructure property 'first_name' of 'user' as it is undefined.
+2024-08-25 22:19:34 | error | Assignment to constant variable.
+2024-08-25 22:26:35 | error | ReferenceError: congig is not defined
+2024-08-25 22:26:53 | error | Assignment to constant variable.
+2024-08-25 22:30:51 | error | Assignment to constant variable.
+2024-08-25 22:32:33 | error | Assignment to constant variable.
+2024-08-25 22:32:58 | error | Assignment to constant variable.

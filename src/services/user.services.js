@@ -1,3 +1,4 @@
+import passport from "passport";
 import UserMongoDB from "../daos/mongodb/user.dao.js";
 const userDAO = new UserMongoDB();
 import { createHash, isValidPassword } from "../utils.js";
@@ -68,4 +69,15 @@ export const createUsersMock = async (count = 100) => {
 
     }
 
+}
+
+export const updatePassword = async (pass, user) => {
+    try {
+        const isSamePassword = isValidPassword(pass, user)
+        if (isSamePassword) return null;
+        const newPassword = createHash(pass)
+        return await userDAO.update(user._id, { password: newPassword })
+    } catch (error) {
+        throw new Error(error)
+    }
 }

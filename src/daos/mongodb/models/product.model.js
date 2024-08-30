@@ -9,6 +9,7 @@ const productsSchema = new Schema({
     stock: { type: Number, required: true },
     thumbnail: { type: Array, required: true },
     status: { type: Boolean, default: true },
+    owner: { type: String, default: "admin" }
 })
 productsSchema.plugin(mongoosePaginate)
 

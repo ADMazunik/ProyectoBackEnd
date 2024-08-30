@@ -1,0 +1,12 @@
+components:
+  schema:
+    Products:
+      GetProductById:
+        $ref: "#components/parameters/schemas/Products"
+      GetAllProducts:
+        type: Object
+        properties:
+          
+        description: Obtiene todos los productos
+    Carts:
+      $ref: "#components/schema/Carts"

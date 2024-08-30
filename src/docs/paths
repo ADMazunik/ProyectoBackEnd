@@ -1,0 +1,19 @@
+paths:
+  /api/products:
+    get:
+      - Products
+    summary: Muestra todos los productos
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#components/parameters/schemas/Products"
+      required: true
+    responses:
+      200:
+        description: Devuelve los productos correctamente
+        content:
+          application/json
+        schema:
+          $ref: "#components/schema/Products"
+  /api/carts/:

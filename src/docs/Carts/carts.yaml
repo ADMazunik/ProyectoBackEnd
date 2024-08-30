@@ -1,0 +1,25 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Devuelve todos los carros de compra
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Devuelve correctamente los carros de compra
+        "500":
+          description: Error del servidor, por ejemplo por un fallo de conexión
+components:
+  schemas:
+    Carts: 
+            type: object
+            properties:
+              _id:
+                type: ObjectId
+                description: Identificador Único del carro de compras
+              products:
+                type: Array
+                description: Productos con su respectiva cantidad dentro del carro de compras
+            example:
+              _id: ObjectId("6658e49154e3df7b624aa3ba")
+              products: [{_id: "6658d75854e3df7b624aa3aa", quantity: 2}]

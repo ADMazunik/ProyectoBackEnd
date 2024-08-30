@@ -35,7 +35,7 @@ export const getById = async (req, res, next) => {
         const { id } = req.params;
         const prod = await service.getById(id);
         if (!prod) httpResponse.NotFound(res, ProductsError.NOT_FOUND, prod)
-        else res.json(prod);
+        else httpResponse.Ok(res, prod);
     } catch (error) {
         next(error);
     }
@@ -45,7 +45,7 @@ export const create = async (req, res, next) => {
     try {
         const newProd = await service.create(req.body);
         if (!newProd) httpResponse.BadRequest(res, ProductsError.NOT_CREATED, data);
-        else res.json(newProd);
+        else httpResponse.Ok(res, newProd);
     } catch (error) {
         next(error);
     }
@@ -56,7 +56,7 @@ export const update = async (req, res, next) => {
         const { id } = req.params;
         const prodUpd = await service.update(id, req.body);
         if (!prodUpd) httpResponse.BadRequest(res, ProductsError.NOT_UPDATED, data);
-        else res.json(prodUpd);
+        else httpResponse.Ok(res, prodUpd);
     } catch (error) {
         next(error);
     }
@@ -67,7 +67,7 @@ export const remove = async (req, res, next) => {
         const { id } = req.params;
         const prodDel = await service.remove(id);
         if (!prodDel) httpResponse.BadRequest(res, ProductsError.NOT_REMOVED, data)
-        else res.json(prodDel);
+        else httpResponse.Ok(res, prodDel);
     } catch (error) {
         next(error);
     }

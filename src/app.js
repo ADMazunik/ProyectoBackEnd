@@ -28,9 +28,14 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 
 import { logger } from "./utils/logger.js";
 
+import swaggerUI from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import { info } from "./docs/info.js";
 
 const app = express();
 const PORT = 8080;
+
+const swaggerSpecs = swaggerJSDoc(info)
 
 const storeConfig = {
     store: MongoStore.create({
@@ -44,7 +49,8 @@ const storeConfig = {
     cookie: { MaxAge: 180000 }
 }
 
-app.use(express.json())
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs))
+    .use(express.json())
     .use(express.urlencoded({ extended: true }))
     .use(express.static(__dirname + "/public"))
     .use(cookieParser())

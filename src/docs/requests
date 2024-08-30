@@ -1,0 +1,63 @@
+components:
+  parameters:
+      schemas:
+          Products:
+            type: object
+            required:
+              - title
+              - code
+              - description
+              - price
+              - stock
+              - thumbnail
+            properties:
+              _id:
+                type: ObjectId
+                description: Identificador único del producto
+              title:
+                type: string
+                description: Nombre del producto
+              code:
+                type: number
+                description: Código correspondiente al producto
+              description:
+                type: string
+                description: Descripción del producto
+              price:
+                type: number
+                description: Precio del producto
+              stock:
+                type: number
+                description: Cantidad disponible del producto
+              thumbnail:
+                type: array
+                description: URLs de las imágenes del producto
+              status:
+                type: boolean
+                description: Estado de disponibilidad del producto
+              owner:
+                type: string
+                description: Nombre del dueño del producto
+            example: 
+              _id: ObjectId("6658d75854e3df7b624aa3aa")
+              title: Producto de Prueba 2
+              code: 2222
+              description: Descripción de producto 2
+              price: 2000
+              stock: 20
+              thumbnail: ["https://picsum.photos/200/200"]
+              status: true
+              owner: admin
+          Carts: 
+            type: object
+            properties:
+              _id:
+                type: ObjectId
+                description: Identificador Único del carro de compras
+              products:
+                type: Array
+                description: Productos con su respectiva cantidad dentro del carro de compras
+            example:
+              _id: ObjectId("6658e49154e3df7b624aa3ba")
+              products: [{_id: "6658d75854e3df7b624aa3aa", quantity: 2}]
+

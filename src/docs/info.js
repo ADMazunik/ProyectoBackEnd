@@ -4,7 +4,7 @@ export const info = {
         info: {
             title: "API E-Commerce",
             version: "0.1a",
-            description: "Documentacion de API para un Ecommerce que cuenta con endpoints para para crear, actualizar y eliminar productos, carros de compra y usuarios de dicho ecomerce",
+            description: "Documentacion de API para un Ecommerce que cuenta con endpoints para para crear, actualizar y eliminar productos, carros de compra y usuarios de dicho ECommerce",
         },
         servers: [
             {

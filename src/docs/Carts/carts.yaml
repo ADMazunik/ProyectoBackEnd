@@ -5,21 +5,271 @@ paths:
       tags:
         - Carts
       responses:
-        "200":
-          description: Devuelve correctamente los carros de compra
+        "201":
+          description: Devuelve correctamente todos los carros de compra
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    description: Código de estado de la respuesta
+                    example: 201
+                  message:
+                    type: string
+                    description: Mensaje del estado de la respuesta
+                    example: "Success"
+                  data:
+                    type: Array
+                    description: Lista de todos los carros
+                    example:
+                      [
+                        {
+                          "_id": "6658e49154e3df7b624aa3ba",
+                          "products":
+                            [
+                              { "id": "9dd3dfe5-ad2a-4142-b918-357d05db5e0e", "quantity": 3 },
+                              { "id": "66d740f5-d445-4efb-921c-a3bda72550df", "quantity": 2 },
+                            ],
+                        },
+                      ]
+                example:
+                  status: 201
+                  message: "Success"
+                  data:
+                    [
+                      {
+                        "_id": "6658e49154e3df7b624aa3ba",
+                        "products":
+                          [
+                            { "id": "9dd3dfe5-ad2a-4142-b918-357d05db5e0e", "quantity": 3 },
+                            { "id": "66d740f5-d445-4efb-921c-a3bda72550df", "quantity": 2 },
+                          ],
+                      },
+                      { "_id": "6658e49154e3df7b624aa3bb", "products": [] },
+                    ]
         "500":
-          description: Error del servidor, por ejemplo por un fallo de conexión
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
+    post:
+      summary: Crea un nuevo carrito de compras
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Devuelve el carrito de compras creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: ObjectId
+                    description: Identificador único del nuevo carro de compras
+                  products:
+                    type: Array
+                    description: No mostrará productos al ser un carrito nuevo
+                example:
+                  _id: ObjectId("6658e49154e3df7b624aa3bf")
+                  products: []
+        "400":
+          description: El carrito de compras no pudo ser creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/BadRequest"
+        "500":
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
+
+  /api/carts/{cid}:
+    get:
+      summary: Devuelve el carro de compra con el ID provisto por parámetros
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Id del carro de compras a buscar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Devuelve correctamente el carro con el ID provisto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: ObjectId
+                    description: Identificador Único del carro de compras
+                  products:
+                    type: Array
+                    description: Productos con su respectiva cantidad dentro del carro de compras
+                example:
+                  _id: ObjectId("6658e49154e3df7b624aa3ba")
+                  products: [{ _id: "6658d75854e3df7b624aa3aa", quantity: 2 }]
+        "404":
+          description: No se encontró el carrito con el ID provisto
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestNotFound"
+        "500":
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
+    delete:
+      summary: Elimina el carro de compras con el ID provisto por parámetros
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Id del carro de compras a eliminar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Devuelve correctamente el carro eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: ObjectId
+                    description: Identificador Único del carro de compras
+                  products:
+                    type: Array
+                    description: Productos con su respectiva cantidad dentro del carro de compras
+                example:
+                  _id: ObjectId("6658e49154e3df7b624aa3ba")
+                  products: [{ _id: "6658d75854e3df7b624aa3aa", quantity: 2 }]
+        "400":
+          description: El carrito de compras no pudo ser eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/BadRequest"
+        "500":
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
+
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: Añade un producto específico a un carrito de compras, se debe proveer por parámetros sus respectivos IDs
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Id del carro de compras a buscar
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: Id del producto que se desea agregar al carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Devuelve correctamente el carro de compras
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: ObjectId
+                    description: Identificador Único del carro de compras
+                  products:
+                    type: Array
+                    description: Productos con su respectiva cantidad dentro del carro de compras
+                example:
+                  _id: ObjectId("6658e49154e3df7b624aa3ba")
+                  products: [{ _id: "6658d75854e3df7b624aa3aa", quantity: 1 }]
+        "400":
+          description: El carrito de compras no pudo ser eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/BadRequest"
+        "500":
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
+    delete:
+      summary: Elimina un producto específico de un carrito de compras, se debe proveer por parámetros sus respectivos IDs
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Id del producto que se desea eliminar del carrito
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: Id del carro de compras a buscar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Devuelve correctamente el carro eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: Mensaje de eliminación correcta
+                    example: product removed successfully from cart
+        "400":
+          description: El carrito de compras no pudo ser eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/BadRequest"
+        "500":
+          description: Error al tratar de contactar el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/RequestServerError"
 components:
   schemas:
-    Carts: 
-            type: object
-            properties:
-              _id:
-                type: ObjectId
-                description: Identificador Único del carro de compras
-              products:
-                type: Array
-                description: Productos con su respectiva cantidad dentro del carro de compras
-            example:
-              _id: ObjectId("6658e49154e3df7b624aa3ba")
-              products: [{_id: "6658d75854e3df7b624aa3aa", quantity: 2}]
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Identificador Único del carro de compras
+        products:
+          type: Array
+          description: Productos con su respectiva cantidad dentro del carro de compras
+      example:
+        _id: ObjectId("6658e49154e3df7b624aa3ba")
+        products: [{ _id: "6658d75854e3df7b624aa3aa", quantity: 2 }]

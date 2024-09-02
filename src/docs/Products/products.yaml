@@ -66,7 +66,7 @@ paths:
     get:
       tags:
         - Products
-      summary: Devuelve un producto a partir del ID
+      summary: Devuelve un producto a partir del ID provisto por parámetros
       parameters:
         - in: path
           name: id
@@ -112,7 +112,7 @@ paths:
                 $ref: "#components/schemas/RequestServerError"
 
     put:
-      summary: Actuliza los datos del producto con el ID provisto
+      summary: Actuliza los datos del producto con el ID provisto por parámetros
       tags:
         - Products
       parameters:
@@ -266,7 +266,7 @@ components:
       properties:
         msg:
           type: string
-          description: La acción no se llevó a cabo
+          description: Error de conexión con el servidor
       example:
         msg: "Invalid Server Error"
     BadRequest:
@@ -277,6 +277,14 @@ components:
           description: La acción no se llevó a cabo
       example:
         msg: "Invalid Request"
+    RequestNotFound:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: No se encontró el elemento buscado
+      example:
+        msg: "Not Found"
 
   requestBodies:
     updateProduct:

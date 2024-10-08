@@ -14,20 +14,20 @@ const logConfig = {
     },
     transports: [
         new winston.transports.Console({
-            level: "info",
+            level: "error",
             format: format.combine(
                 format.colorize(),
                 format.simple()
             )
         }),
-        new winston.transports.File({
+        /* new winston.transports.File({
             filename: "./logs/logger.log",
             level: "error",
             format: format.combine(
                 format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
                 format.printf((data) => `${data.timestamp} | ${data.level} | ${data.message}`),
             )
-        })
+        }) */
     ]
 }
 

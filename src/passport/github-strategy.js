@@ -3,10 +3,14 @@ import { Strategy as GithubStrategy } from "passport-github2";
 import passport from "passport";
 import "dotenv/config";
 
+const ENV = process.argv[2] || "prod"
+
+const callBackURL = ENV == "dev" ? "http://localhost:3000/login" : "https://proyecto-back-end-phi.vercel.app/login";
+
 const strategyConfig = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/users/profile"
+    callbackURL: callBackURL
 }
 
 const registerOrLogin = async (accessToken, refreshToken, profile, done) => {

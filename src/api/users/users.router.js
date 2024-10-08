@@ -12,7 +12,7 @@ router.post("/register", passport.authenticate('register'), controllers.register
 
 router.get("/register-github", passport.authenticate("github", { scope: ["user:email"] }));
 
-router.get("/profile", [checkAuth], controllers.profile);
+router.get("/profile", controllers.profile);
 
 router.get("/logout", controllers.logout);
 router.get("/current", controllers.currentSession);

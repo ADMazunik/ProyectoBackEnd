@@ -35,7 +35,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import { info } from "./docs/info.js";
 
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
 const swaggerSpecs = swaggerJSDoc(info)
 
@@ -77,7 +77,7 @@ initMongoDB();
 
 
 const httpServer = app.listen(PORT, () => {
-    logger.info(`Server UP on port ${PORT}`)
+    logger.info(`Vercel Server UP on port ${PORT}`)
 });
 
 const socketServer = new Server(httpServer)

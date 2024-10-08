@@ -14,7 +14,7 @@ const logConfig = {
     },
     transports: [
         new winston.transports.Console({
-            level: ENV == "dev" ? "debug" : "info",
+            level: "info",
             format: format.combine(
                 format.colorize(),
                 format.simple()

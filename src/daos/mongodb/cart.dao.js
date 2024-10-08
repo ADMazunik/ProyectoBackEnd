@@ -59,7 +59,7 @@ export default class CartMongoDB {
             throw new Error(error);
         }
     }
-    async cleanCart(cartId) {
+    async clearCart(cartId) {
         try {
             return await CartModel.findByIdAndUpdate(
                 cartId,

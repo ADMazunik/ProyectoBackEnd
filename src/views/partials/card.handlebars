@@ -1,12 +1,13 @@
 <div>
-    <div class="m-3 p-3 d-flex flex-wrap gap-3" id="products">
+    <div class="m-3 p-3 d-flex flex-wrap gap-2" id="products">
         {{#each products.payload}}
         <div class="card" style="width: 10rem;">
             <img src={{thumbnail}} class="card-img-top" alt={{title}}>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column gap-2">
                 <h5 class="card-title">{{title}}</h5>
                 <p class="card-text">{{description}}</p>
                 <a href="#" class="btn btn-primary">${{price}}</a>
+                <a href="/api/carts/products/{{_id}}" class="btn btn-primary">Añadir al Carrito</a>
             </div>
         </div>
         {{/each}}

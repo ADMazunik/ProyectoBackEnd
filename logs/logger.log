@@ -1,0 +1,22 @@
+2024-10-07 15:59:44 | error | undefined
+2024-10-07 16:05:36 | error | Failed to deserialize user out of session
+2024-10-07 16:05:46 | error | Failed to deserialize user out of session
+2024-10-07 16:05:56 | error | Failed to deserialize user out of session
+2024-10-07 16:07:05 | error | Failed to deserialize user out of session
+2024-10-07 16:09:49 | error | ReferenceError: UserDAO is not defined
+2024-10-07 16:10:14 | error | TypeError: userDAO.getUserById is not a function
+2024-10-07 18:33:56 | error | TypeError: Cannot read properties of undefined (reading 'cart')
+2024-10-07 18:58:02 | error | Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-71df0cbc47bsm4869817b3a.34 - gsmtp
+2024-10-07 19:00:31 | error | Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-20c1398ee12sm44026675ad.287 - gsmtp
+2024-10-07 19:01:19 | error | Error: Invalid login: 534-5.7.9 Application-specific password required. For more information, go to
+534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor d9443c01a7336-20c138d0b50sm44193785ad.102 - gsmtp
+2024-10-07 19:03:11 | error | Error: Invalid login: 534-5.7.9 Application-specific password required. For more information, go to
+534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor d2e1a72fcca58-71df0d7d09bsm4868215b3a.199 - gsmtp
+2024-10-07 19:04:07 | error | Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-2e20ae696aasm5947953a91.1 - gsmtp
+2024-10-07 19:57:20 | error | Error: ValidationError: amount: Path `amount` is required.
+2024-10-07 20:40:08 | error | ReferenceError: prodService is not defined
+2024-10-07 21:14:12 | error | Error: TypeError: UserModel.getAll is not a function
+2024-10-07 21:15:57 | error | ReferenceError: hasBeenMoreThanXTime is not defined

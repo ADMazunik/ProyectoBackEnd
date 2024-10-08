@@ -10,6 +10,7 @@ import productsRouter from "./api/products/products.router.js";
 import cartsRouter from "./api/carts/carts.router.js";
 import usersRouter from "./api/users/users.router.js"
 import viewsRouter from "./api/views/views.router.js";
+import ticketRouter from "./api/ticket/ticket.router.js"
 
 import { initMongoDB } from "./daos/mongodb/connection.js";
 
@@ -25,6 +26,7 @@ import "./passport/local-strategy.js";
 import './passport/github-strategy.js';
 
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { checkAuth } from "./middlewares/checkAuth.js";
 
 import { logger } from "./utils/logger.js";
 
@@ -63,9 +65,10 @@ app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs))
     .use(passport.initialize())
     .use(passport.session())
 
-    .use("/api/products", productsRouter)
-    .use("/api/carts", cartsRouter)
-    .use("/api/sessions", usersRouter)
+    .use("/api/products", checkAuth, productsRouter)
+    .use("/api/carts", checkAuth, cartsRouter)
+    .use("/api/sessions", checkAuth, usersRouter)
+    .use("/api/ticket", checkAuth, ticketRouter)
     .use("/users", usersRouter)
     .use("/", viewsRouter)
     .use(errorHandler);

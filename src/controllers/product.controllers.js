@@ -43,6 +43,7 @@ export const getById = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
     try {
+        if (req.session) req.body.owner = req.session.info.user.email;
         const newProd = await service.create(req.body);
         if (!newProd) httpResponse.BadRequest(res, ProductsError.NOT_CREATED, data);
         else httpResponse.Ok(res, newProd);

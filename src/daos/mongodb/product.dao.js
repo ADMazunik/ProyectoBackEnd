@@ -2,7 +2,7 @@ import { ProductModel } from "./models/product.model.js";
 
 
 export default class ProductMongoDB {
-    async getAll(page = 1, limit = 10, name, sort) {
+    async getAll(page = 1, limit = 20, name, sort) {
         try {
             const filter = name ? { "title": name } : {}
             let sortOrder = {}

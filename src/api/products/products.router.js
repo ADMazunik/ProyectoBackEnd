@@ -1,5 +1,8 @@
 import { Router } from "express";
 import * as controller from "../../controllers/product.controllers.js";
+import { checkPremium } from "../../middlewares/checkPremium.js";
+import { checkAdmin } from "../../middlewares/checkAdmin.js";
+
 
 const router = Router();
 
@@ -9,11 +12,11 @@ router.get("/mockingproducts", controller.getProductsMock);
 
 router.get("/:id", controller.getById);
 
-router.post("/", controller.create);
+router.post("/", [checkPremium], controller.create);
 
-router.put("/:id", controller.update);
+router.put("/:id", [checkPremium], controller.update);
 
-router.delete("/:id", controller.remove);
+router.delete("/:id", [checkAdmin], controller.remove);
 
 
 export default router;

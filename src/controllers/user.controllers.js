@@ -2,7 +2,7 @@ import * as service from "../services/user.services.js"
 import { HttpResponse } from "../utils/http.response.js";
 const httpResponse = new HttpResponse()
 
-import { sendMail } from "../services/mailing.js";
+import { sendMail } from "../services/mailing.service.js";
 
 export const registerResponse = (req, res, next) => {
     try {
@@ -17,7 +17,7 @@ export const loginResponse = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user
         const user = await service.getUserById(id)
-        if (!user) httpResponse.NotFound(res, user)
+        if (!user) httpResponse.NotFound(res, undefined, user)
         else {
             req.session.info = {
                 user,
@@ -47,7 +47,7 @@ export const currentSession = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user
         const user = await service.getUserById(id)
-        if (!user) httpResponse.Unauthorized(res, user)
+        if (!user) httpResponse.Unauthorized(res, undefined, user)
         else {
             req.session.info = {
                 user,
@@ -60,7 +60,20 @@ export const currentSession = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
 
+export const profile = async (req, res, next) => {
+    try {
+        if (req.session.info.user) {
+            const { _id } = req.session.info.user
+            const profileUser = await service.getProfileUserByid(_id)
+            return httpResponse.Ok(res, profileUser)
+        } else {
+            return httpResponse.Unauthorized(res, "Unauthorized", "Must be Logged In")
+        }
+    } catch (error) {
+        next(error)
+    }
 }
 
 export const getUsersMock = async (req, res, next) => {
@@ -79,11 +92,11 @@ export const generateResetPassword = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user;
         const user = await service.getUserById(id)
-        if (!user) return httpResponse.NotFound(res, user)
+        if (!user) return httpResponse.NotFound(res, undefined, user)
         else {
-            const mail = await sendMail(user);
-            if (mail == true) return httpResponse.Ok(res, user)
-            else return httpResponse.NotFound(res, user)
+            const mail = await sendMail(user, "resetPassword");
+            if (mail == true) return httpResponse.Ok(res, undefined, user)
+            else return httpResponse.NotFound(res, undefined, user)
         }
 
     } catch (error) {
@@ -96,7 +109,7 @@ export const updatePassword = async (req, res, next) => {
         let id = null;
         if (req.session.passport && req.session.passport.user) id = req.session.passport.user
         const user = await service.getUserById(id)
-        if (!user) httpResponse.NotFound(res, user)
+        if (!user) httpResponse.NotFound(res, undefined, user)
         const { password } = req.body;
 
         const newPass = await service.updatePassword(password, user);
@@ -108,40 +121,13 @@ export const updatePassword = async (req, res, next) => {
 
 }
 
-/* export const login = async (req, res, next) => {
+export const checkUsersStatus = async (req, res, next) => {
     try {
-        const { email, password } = req.body
-        const response = await service.login(email, password)
-        if (!response) return res.status(401).json({ msg: "Usuario o Contraseña incorrectos" })
-        else {
-            req.session.info = {
-                loggedIn: true,
-                username: email,
-                role: response.role
-            };
-            res.status(201).redirect("/products")
-        }
+        const checkUsers = await service.checkUsersStatus();
+        if (!checkUsers) return httpResponse.BadRequest(res, undefined, "Couldn't verify users")
+        return httpResponse.Ok(res, checkUsers)
+
     } catch (error) {
-        next(error);
+        next(error)
     }
 }
-
-export const register = async (req, res, next) => {
-    try {
-        const { email, password } = req.body
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
-            const newUser = await service.register({
-                ...req.body,
-                role: "admin"
-            })
-            if (!newUser) return res.status(401).json({ msg: "User already exists" })
-            else return res.redirect("/login")
-        } else {
-            const newUser = await service.register(req.body)
-            if (!newUser) return res.status(401).json({ msg: "User already exists" })
-            else return res.redirect("/login")
-        }
-    } catch (error) {
-        next(error);
-    }
-} */

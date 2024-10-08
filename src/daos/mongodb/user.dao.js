@@ -1,6 +1,15 @@
 import { UserModel } from "./models/user.model.js"
 
 export default class UserMongoDB {
+
+    async getAll() {
+        try {
+            return await UserModel.find({});
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
     async login(email, password) {
         try {
             return await UserModel.findOne({ email, password })
@@ -22,7 +31,7 @@ export default class UserMongoDB {
 
     async getById(id) {
         try {
-            return await UserModel.findById(id)
+            return await UserModel.findById(id).populate("cart")
         } catch (error) {
             throw new Error(error);
         }

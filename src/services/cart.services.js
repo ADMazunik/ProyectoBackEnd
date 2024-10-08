@@ -63,6 +63,16 @@ export const removeProductInCart = async (cartId, prodId) => {
     }
 }
 
+export const clearCart = async (cartId) => {
+    try {
+        const cartExist = await cartDao.getById(cartId)
+        if (!cartExist) return null;
+        return await cartDao.clearCart(cartId)
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 export const remove = async (id) => {
     try {
         return await cartDao.delete(id);

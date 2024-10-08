@@ -25,15 +25,22 @@ const UserSchema = new Schema({
         type: String,
         default: "user"
     },
-    cart: [
-        {
-            _id: false,
-            product: {
-                type: Schema.Types.ObjectId,
-                ref: "carts"
-            }
-        }
-    ]
+    last_connection: {
+        type: Date,
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
+    cart: {
+        type: Schema.Types.ObjectId,
+        ref: "carts",
+        default: [],
+    },
+    creation_date: {
+        type: Date
+    }
+
 });
 
 export const UserModel = model('users', UserSchema);

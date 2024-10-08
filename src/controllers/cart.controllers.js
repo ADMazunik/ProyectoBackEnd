@@ -35,11 +35,25 @@ export const create = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
     try {
-        const { cid, pid } = req.params
+        const cid = req.session.info.user.cart
+        const { pid } = req.params
         const { quantity } = req.body
         const response = await service.addProductToCart(cid, pid, quantity)
         if (!response) httpResponse.BadRequest(res, CartsError.PRODUCT_OR_CART_NOT_FOUND, response)
         res.status(200).json(response)
+    } catch (error) {
+        next(error);
+    }
+
+}
+export const addProductToCartAndRedirect = async (req, res, next) => {
+    try {
+        const cid = req.session.info.user.cart
+        const { pid } = req.params
+        const { quantity } = req.body
+        const response = await service.addProductToCart(cid, pid, quantity)
+        if (!response) httpResponse.BadRequest(res, CartsError.PRODUCT_OR_CART_NOT_FOUND, response)
+        res.redirect("/cart")
     } catch (error) {
         next(error);
     }

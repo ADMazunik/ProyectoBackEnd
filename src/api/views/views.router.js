@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     else return res.redirect("/products")
 });
 
-router.get("/products", [checkAuth], async (req, res) => {
+router.get("/products", async (req, res) => {
     try {
         const { loggedIn, username, role } = req.session.info || false
         const isAdmin = role === "admin" ? true : false

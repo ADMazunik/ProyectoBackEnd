@@ -6,7 +6,7 @@ import "dotenv/config";
 const strategyConfig = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:8080/users/profile"
+    callbackURL: "http://localhost:3000/users/profile"
 }
 
 const registerOrLogin = async (accessToken, refreshToken, profile, done) => {

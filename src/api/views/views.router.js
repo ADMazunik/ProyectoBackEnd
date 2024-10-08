@@ -103,15 +103,16 @@ router.get("/register", async (req, res) => {
     res.render("register")
 });
 
-router.get("/profile-github", [checkAuth], async (req, res) => {
-    const user = req.user.toObject()
+router.get("/profile-github", async (req, res) => {
+    const user = req.user
+    const userView = user.toObject()
     req.session.info = {
         user,
         loggedIn: true,
         username: user.email,
         role: user.role
     };
-    res.render("profile", { user, loggedIn: true, username: user.email })
+    res.render("profile", { user: userView, loggedIn: true, username: user.email })
 });
 
 router.get("/loggerTest", async (req, res) => {

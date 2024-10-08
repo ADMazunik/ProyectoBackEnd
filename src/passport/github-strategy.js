@@ -5,7 +5,7 @@ import "dotenv/config";
 
 const ENV = process.argv[2] || "prod"
 
-const callBackURL = ENV == "dev" ? "http://localhost:3000/products" : "https://proyecto-back-end-phi.vercel.app/products";
+const callBackURL = ENV == "dev" ? "http://localhost:3000/users/github-callback" : "https://proyecto-back-end-phi.vercel.app/users/github-callback";
 
 const strategyConfig = {
     clientID: process.env.CLIENT_ID,

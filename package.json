@@ -2,7 +2,7 @@
   "name": "proyectobackend",
   "version": "1.0.0",
   "description": "Proyecto Backend utilizando el framework Express para desarrollar un servidor",
-  "main": "./src/app.js",
+  "main": "./src/server.js",
   "type": "module",
   "scripts": {
     "start": "node .",

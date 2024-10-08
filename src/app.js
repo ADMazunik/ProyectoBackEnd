@@ -106,3 +106,5 @@ socketServer.on("connection", async (socket) => {
         socketServer.emit("messages", await messageService.getAll())
     })
 });
+
+export default app;
